@@ -1,6 +1,6 @@
 package lrskyum.stoxx.business
 
-import org.asynchttpclient._
+import org.asynchttpclient.Dsl._
 
 import java.net.URL
 import java.time.LocalDate
@@ -15,15 +15,15 @@ trait QuoteSource {
 }
 
 class AlphaVantageQuoteSource extends QuoteSource {
-  val key = "..."
+  val key = "EJSFNVGS7Q00C4N6"
 
   def olhcUrl(symbol: String): URL = {
     new URL(s"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}&apikey=${key}")
   }
 
   override def quotes: List[Quote] = {
-    val request = Dsl.get(olhcUrl("IBM").toExternalForm).build()
-    val response = Dsl.asyncHttpClient.executeRequest(request).get().getResponseBody
+    val request = get(olhcUrl("IBM").toExternalForm).build()
+    val response = asyncHttpClient.executeRequest(request).get().getResponseBody
     null
   }
 }
