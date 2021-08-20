@@ -1,48 +1,50 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.3'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'scala'
-	id 'war'
+    id 'org.springframework.boot' version '2.5.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'scala'
+    id 'war'
 }
 
 group = 'lrskyum.stoxx'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 ext {
-	set('springCloudVersion', "2020.0.3")
+    set('springCloudVersion', "2020.0.3")
 }
 
 dependencies {
-	implementation 'org.scala-lang:scala-library:2.13.5'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	implementation 'org.springframework.boot:spring-boot-starter-websocket'
-	implementation 'org.asynchttpclient:async-http-client:2.12.3'
+    implementation 'com.softwaremill.sttp.client3:core_3:3.3.13'
+    implementation 'org.asynchttpclient:async-http-client:2.12.3'
+    implementation 'com.fasterxml.jackson.module:jackson-module-scala_2.13:2.12.4'
 
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.scala-lang:scala-library:2.13.5'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'junit:junit:4.13.2'
-	testImplementation 'org.scalatest:scalatest_2.13:3.2.6'
-	testImplementation 'org.scalatestplus:junit-4-13_2.13:3.2.2.0'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.scalatest:scalatest_2.13:3.2.6'
+    testImplementation 'org.scalatestplus:junit-4-13_2.13:3.2.2.0'
+    testImplementation 'org.scalatestplus:mockito-3-4_2.13:3.2.9.0'
 
 //	testImplementation 'io.projectreactor:reactor-test'
 //	testImplementation 'org.springframework.batch:spring-batch-test'
@@ -63,11 +65,11 @@ dependencies {
 }
 
 dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
